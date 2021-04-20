@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Welcome } from './src/pages/Welcome';
+import { Welcome } from './pages/Welcome';
 
 export default function App() {
   return <Welcome />;
