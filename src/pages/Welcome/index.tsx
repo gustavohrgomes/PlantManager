@@ -1,10 +1,9 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { Container, Title, Subtitle, Image } from './styles';
+import { Container, Title, Subtitle, Image, ButtonContainer } from './styles';
 
 import watering from '../../assets/watering.png';
-
-import Button from '../../components/Button';
 
 export function Welcome() {
   return (
@@ -15,14 +14,16 @@ export function Welcome() {
         forma fácil
       </Title>
 
-      <Image source={watering} />
+      <Image source={watering} resizeMode="contain" />
 
       <Subtitle>
         Não esqueça mais de regar suas plantas. Nós cuidamos de lembrar você
         sempre que precisar.
       </Subtitle>
 
-      <Button text=">" />
+      <ButtonContainer activeOpacity={0.8}>
+        <Icon name="arrow-forward-ios" size={20} color="white" />
+      </ButtonContainer>
     </Container>
   );
 }
