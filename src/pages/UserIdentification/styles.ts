@@ -3,10 +3,6 @@ import styled from 'styled-components/native';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 
-interface Input {
-  isFocused: boolean;
-}
-
 export const Container = styled.View`
   flex: 1;
   width: 100%;
