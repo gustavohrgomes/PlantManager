@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { Keyboard } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
+
 import { Button } from '../../components/Button';
 import {
   Container,
@@ -15,6 +18,8 @@ export function UserIdentification() {
   const [isFilled, setIsFilled] = useState(false);
   const [name, setName] = useState<string>('');
 
+  const navigation = useNavigation();
+
   function handleInputBlur() {
     setIsFocused(false);
     setIsFilled(!!name);
@@ -29,8 +34,12 @@ export function UserIdentification() {
     setName(value);
   }
 
+  function handleSubmit() {
+    navigation.navigate('Confirmation');
+  }
+
   return (
-    <Container>
+    <Container onPress={Keyboard.dismiss}>
       <Content>
         <Form>
           <Emoji>{isFilled ? '😄' : '🤔'}</Emoji>
@@ -47,7 +56,7 @@ export function UserIdentification() {
           />
 
           <Footer>
-            <Button text="Confirmar" />
+            <Button text="Confirmar" onPress={handleSubmit} />
           </Footer>
         </Form>
       </Content>

@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 
-export const Container = styled.View`
+export const Container = styled.TouchableWithoutFeedback`
   flex: 1;
   width: 100%;
   align-items: center;

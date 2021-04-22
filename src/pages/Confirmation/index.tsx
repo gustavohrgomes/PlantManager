@@ -17,7 +17,7 @@ export function Confirmation() {
         </Subtitle>
 
         <Footer>
-          <Button text="Confirmar" />
+          <Button text="Começar" />
         </Footer>
       </Content>
     </Container>
