@@ -3,6 +3,10 @@ import styled from 'styled-components/native';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 
+interface TypeNameProps {
+  isFocused: Boolean;
+}
+
 export const Container = styled.TouchableWithoutFeedback`
   flex: 1;
   width: 100%;
@@ -33,7 +37,9 @@ export const Emoji = styled.Text`
   font-size: 44px;
 `;
 
-export const Input = styled.TextInput<{ isFocused: Boolean }>`
+export const Input = styled.TextInput.attrs({
+  placeholderTextColor: `${colors.gray}`,
+})<TypeNameProps>`
   width: 100%;
   font-size: 18px;
   color: ${colors.heading};

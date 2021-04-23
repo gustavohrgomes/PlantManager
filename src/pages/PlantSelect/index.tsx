@@ -42,9 +42,10 @@ interface PlantProps {
 export function PlantSelect() {
   const [environments, setenvironments] = useState<environmentProps[]>([]);
   const [environmentSelected, setenvironmentSelected] = useState('all');
-  const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
   const [plants, setPlants] = useState<PlantProps[]>([]);
+  const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefresing] = useState(false);
 
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -69,8 +70,25 @@ export function PlantSelect() {
   }, []);
 
   useEffect(() => {
-    fetchPlants();
+    loadPlants();
   }, []);
+
+  async function loadPlants() {
+    const { data } = await api.get(
+      `plants?_sort=name&_order=asc&_page=${page}&_limit=6`,
+    );
+
+    if (!data) {
+      return setLoading(true);
+    }
+
+    setPlants(oldPlants => (page > 1 ? [...oldPlants, ...data] : data));
+    setFilteredPlants(oldPlants => (page > 1 ? [...oldPlants, ...data] : data));
+
+    setLoading(false);
+    setLoadingMore(false);
+    setRefresing(false);
+  }
 
   function handleEnvironmentSelected(environment: string) {
     setenvironmentSelected(environment);
@@ -84,35 +102,23 @@ export function PlantSelect() {
     setFilteredPlants(filtered);
   }
 
-  async function fetchPlants() {
-    const { data } = await api.get(
-      `plants?_sort=name&_order=asc&_page=${page}&_limit=6`,
-    );
-
-    if (!data) {
-      return setLoading(true);
-    }
-
-    if (page > 1) {
-      setPlants(oldValue => [...oldValue, ...data]);
-      setFilteredPlants(oldValue => [...oldValue, ...data]);
-    } else {
-      setPlants(data);
-      setFilteredPlants(data);
-    }
-
-    setLoading(false);
-    setLoadingMore(false);
-  }
-
-  function handleFetchMore(distance: number) {
+  function loadMorePlants(distance: number) {
     if (distance < 1) {
       return;
     }
 
+    const nextPage: number = page + 1;
+
     setLoadingMore(true);
-    setPage(oldValue => oldValue + 1);
-    fetchPlants();
+    setPage(nextPage);
+    loadPlants();
+  }
+
+  function refreshPlants() {
+    setRefresing(true);
+    setPlants([]);
+    setFilteredPlants([]);
+    loadPlants();
   }
 
   if (loading) {
@@ -144,13 +150,15 @@ export function PlantSelect() {
       <PlantsContainer>
         <Plants
           data={filteredPlants}
+          onEndReachedThreshold={0.2}
+          onEndReached={({ distanceFromEnd }) =>
+            loadMorePlants(distanceFromEnd)
+          }
+          onRefresh={refreshPlants}
+          refreshing={refreshing}
           renderItem={({ item }: any) => (
             <PlantCardPrimary name={item.name} photo={item.photo} />
           )}
-          onEndReachedThreshold={0.1}
-          onEndReached={({ distanceFromEnd }) =>
-            handleFetchMore(distanceFromEnd)
-          }
           ListFooterComponent={
             loadingMore ? <ActivityIndicator color={colors.green} /> : <></>
           }
