@@ -30,6 +30,7 @@
 		0B74C8D4F5D5444D8D5AA66D /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A229A0E05EC47FB90ECD548 /* Zocial.ttf */; };
 		A3B2EA6EAD514CA3A196FE16 /* Jost-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39EA55FB762746C7AE9ADD16 /* Jost-Regular.ttf */; };
 		AD8098BD0E8C4DA7830D9DB4 /* Jost-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAE06794FF1E401BA399CD39 /* Jost-SemiBold.ttf */; };
+		E87715CBF5D7454DAFD438CB /* Jost-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96D72A670F6F4EDF99837984 /* Jost-Medium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		1A229A0E05EC47FB90ECD548 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		39EA55FB762746C7AE9ADD16 /* Jost-Regular.ttf */ = {isa = PBXFileReference; name = "Jost-Regular.ttf"; path = "../assets/fonts/Jost-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		EAE06794FF1E401BA399CD39 /* Jost-SemiBold.ttf */ = {isa = PBXFileReference; name = "Jost-SemiBold.ttf"; path = "../assets/fonts/Jost-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		96D72A670F6F4EDF99837984 /* Jost-Medium.ttf */ = {isa = PBXFileReference; name = "Jost-Medium.ttf"; path = "../assets/fonts/Jost-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				1A229A0E05EC47FB90ECD548 /* Zocial.ttf */,
 				39EA55FB762746C7AE9ADD16 /* Jost-Regular.ttf */,
 				EAE06794FF1E401BA399CD39 /* Jost-SemiBold.ttf */,
+				96D72A670F6F4EDF99837984 /* Jost-Medium.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				0B74C8D4F5D5444D8D5AA66D /* Zocial.ttf in Resources */,
 				A3B2EA6EAD514CA3A196FE16 /* Jost-Regular.ttf in Resources */,
 				AD8098BD0E8C4DA7830D9DB4 /* Jost-SemiBold.ttf in Resources */,
+				E87715CBF5D7454DAFD438CB /* Jost-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

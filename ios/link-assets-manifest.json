@@ -1,0 +1,17 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Jost-Medium.ttf",
+      "sha1": "82a7ae9626c22c13919e74e6e6394a6c37513695"
+    },
+    {
+      "path": "assets/fonts/Jost-Regular.ttf",
+      "sha1": "fd03d18e64f807a056a6388171c259ec6c3a97bd"
+    },
+    {
+      "path": "assets/fonts/Jost-SemiBold.ttf",
+      "sha1": "c35ced7c9fb59a5d1e50abf0a64c526fb1fca21c"
+    }
+  ]
+}
