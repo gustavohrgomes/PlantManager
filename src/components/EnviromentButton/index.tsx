@@ -8,16 +8,16 @@ import {
   ButtonActiveText,
 } from './styles';
 
-interface EnviromentButtonProps extends RectButtonProps {
+interface EnvironmentButtonProps extends RectButtonProps {
   title: String;
   active?: Boolean;
 }
 
-export function EnviromentButton({
+export function EnvironmentButton({
   title,
   active = false,
   ...props
-}: EnviromentButtonProps) {
+}: EnvironmentButtonProps) {
   if (active) {
     return (
       <ButtonActiveContainer {...props}>

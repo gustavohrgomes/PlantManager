@@ -27,11 +27,11 @@ export const Subtitle = styled.Text`
   color: ${colors.body_dark};
 `;
 
-export const EnviromentTextContainer = styled.View`
+export const EnvironmentTextContainer = styled.View`
   margin-top: 35px;
 `;
 
-export const Enviroments = styled.FlatList.attrs({
+export const Environments = styled.FlatList.attrs({
   horizontal: true,
   showsHorizontalScrollIndicator: false,
 })`
@@ -39,6 +39,14 @@ export const Enviroments = styled.FlatList.attrs({
   margin: 32px 0 32px 32px;
 `;
 
-export const Plants = styled.FlatList`
+export const PlantsContainer = styled.View`
+  flex: 1;
+  margin: 0 32px;
+`;
+
+export const Plants = styled.FlatList.attrs({
+  showsVerticalScrollIndicator: false,
+  numColumns: 2,
+})`
   flex: 1;
 `;
