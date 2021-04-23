@@ -75,7 +75,7 @@ export function PlantSelect() {
 
   async function loadPlants() {
     const { data } = await api.get(
-      `plants?_sort=name&_order=asc&_page=${page}&_limit=6`,
+      `plants?_sort=name&_order=asc&_page=${page}&_limit=8`,
     );
 
     if (!data) {
@@ -107,13 +107,16 @@ export function PlantSelect() {
       return;
     }
 
-    const nextPage: number = page + 1;
-
     setLoadingMore(true);
-    setPage(nextPage);
+    setPage(oldPage => oldPage + 1);
     loadPlants();
   }
 
+  // TODO: Verificar o porquê quando quando não há mais dados para buscar na api,
+  // o número da paginação continua aumentando mesmo não havendo mais dados a buscar
+  // levando a um bug que quando damos um refresh na lista de plantas, ela fica em branco
+  // pois o numero da página não contem mais nenhum dado.
+  // SOLUTION: Resetar o número da paginação ao dar um refresh na lista
   function refreshPlants() {
     setRefresing(true);
     setPlants([]);
@@ -150,7 +153,7 @@ export function PlantSelect() {
       <PlantsContainer>
         <Plants
           data={filteredPlants}
-          onEndReachedThreshold={0.2}
+          onEndReachedThreshold={0.1}
           onEndReached={({ distanceFromEnd }) =>
             loadMorePlants(distanceFromEnd)
           }
