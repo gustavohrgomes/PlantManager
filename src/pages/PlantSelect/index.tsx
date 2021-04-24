@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 
 import { Header } from '../../components/Header';
 import { EnvironmentButton } from '../../components/EnviromentButton';
@@ -20,8 +21,7 @@ import {
 import colors from '../../styles/colors';
 
 import api from '../../services/api';
-
-interface environmentProps {
+interface EnvironmentProps {
   key: string;
   title: string;
 }
@@ -40,7 +40,7 @@ interface PlantProps {
 }
 
 export function PlantSelect() {
-  const [environments, setenvironments] = useState<environmentProps[]>([]);
+  const [environments, setenvironments] = useState<EnvironmentProps[]>([]);
   const [environmentSelected, setenvironmentSelected] = useState('all');
   const [plants, setPlants] = useState<PlantProps[]>([]);
   const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
@@ -49,7 +49,8 @@ export function PlantSelect() {
 
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
-  const [loadedAll, setLoadedAll] = useState(false);
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     // é usado uma async function, pois o use effect não permite 'async () => {}'
@@ -124,6 +125,10 @@ export function PlantSelect() {
     loadPlants();
   }
 
+  function handleNavigatePlantSave(plant: PlantProps) {
+    navigation.navigate('PlantSave', { plant });
+  }
+
   if (loading) {
     return <Load />;
   }
@@ -139,8 +144,20 @@ export function PlantSelect() {
         </EnvironmentTextContainer>
       </HeaderContainer>
 
+      {/*
+        Nos atributos dos componentes Environments e Plants abaixo,
+        estou tipando os items como 'any', pois há alguma
+        imcompatibilidade com a tipagem do styled components.
+
+        Se eu utilizar uma FlatList pura, o typescript consegue
+        fazer a inferência de tipos normalmente.
+
+        Caso o item fique sem tipagem, o mesmo será tipado como 'unknown'
+        e o compiler irá reclamar
+      */}
       <Environments
         data={environments}
+        keyExtractor={(item: any) => String(item.key)}
         renderItem={({ item }: any) => (
           <EnvironmentButton
             title={item.title}
@@ -153,6 +170,7 @@ export function PlantSelect() {
       <PlantsContainer>
         <Plants
           data={filteredPlants}
+          keyExtractor={(item: any) => String(item.id)}
           onEndReachedThreshold={0.1}
           onEndReached={({ distanceFromEnd }) =>
             loadMorePlants(distanceFromEnd)
@@ -160,7 +178,11 @@ export function PlantSelect() {
           onRefresh={refreshPlants}
           refreshing={refreshing}
           renderItem={({ item }: any) => (
-            <PlantCardPrimary name={item.name} photo={item.photo} />
+            <PlantCardPrimary
+              name={item.name}
+              photo={item.photo}
+              onPress={() => handleNavigatePlantSave(item)}
+            />
           )}
           ListFooterComponent={
             loadingMore ? <ActivityIndicator color={colors.green} /> : <></>
