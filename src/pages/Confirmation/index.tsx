@@ -3,28 +3,48 @@ import { useNavigation } from '@react-navigation/core';
 import { Container, Content, Title, Subtitle, Emoji, Footer } from './styles';
 
 import { Button } from '../../components/Button';
+import { useRoute } from '@react-navigation/native';
+
+interface Params {
+  title: string;
+  subtitle: string;
+  buttonTitle: string;
+  icon: 'smile' | 'hug';
+  nextScreen: string;
+}
+
+const emojis = {
+  hug: '🤗',
+  smile: '😄',
+};
 
 export function Confirmation() {
   const navigation = useNavigation();
+  const routes = useRoute();
+
+  const {
+    title,
+    subtitle,
+    buttonTitle,
+    icon,
+    nextScreen,
+  } = routes.params as Params;
 
   function handleMoveOn() {
-    navigation.navigate('PlantSelect');
+    navigation.navigate(nextScreen);
   }
 
   return (
     <Container>
       <Content>
-        <Emoji>😁</Emoji>
+        <Emoji>{emojis[icon]}</Emoji>
 
-        <Title>Prontinho</Title>
+        <Title>{title}</Title>
 
-        <Subtitle>
-          Agora vamos começar a cuidar das suas {'\n'}
-          plantinhas com muito cuidado.
-        </Subtitle>
+        <Subtitle>{subtitle}</Subtitle>
 
         <Footer>
-          <Button text="Começar" onPress={handleMoveOn} />
+          <Button text={buttonTitle} onPress={handleMoveOn} />
         </Footer>
       </Content>
     </Container>

@@ -40,16 +40,24 @@ export function UserIdentification() {
       return Alert.alert('Diz pra mim qual o seu nome 😢');
     }
 
-    await AsyncStorage.setItem('@plantmanager:user', name);
-
-    navigation.navigate('Confirmation');
+    try {
+      await AsyncStorage.setItem('@plantmanager:user', name);
+      navigation.navigate('Confirmation', {
+        title: 'Prontinho',
+        subtitle:
+          'Agora vamos começar a cuidar das suas plantinhas com muito cuidado',
+        buttonTitle: 'Começar',
+        icon: 'smile',
+        nextScreen: 'PlantSelect',
+      });
+    } catch (error) {}
   }
 
   return (
     <Container onPress={Keyboard.dismiss}>
       <Content>
         <Form>
-          <Emoji>{isFilled ? '😄' : '🤔'}</Emoji>
+          <Emoji>{isFilled ? '😃' : '🤔'}</Emoji>
           <Title>
             Como podemos {'\n'}
             chamar você?

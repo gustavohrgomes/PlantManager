@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Alert, Platform } from 'react-native';
-import { useRoute } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/core';
 import DateTimePicker, { Event } from '@react-native-community/datetimepicker';
 import { isBefore, format } from 'date-fns';
 
 import { Button } from '../../components/Button';
+
+import { PlantProps, savePlant } from '../../libs/storage';
 
 import {
   Container,
@@ -24,18 +26,7 @@ import {
 import waterdrop from '../../assets/waterdrop.png';
 
 interface Params {
-  plant: {
-    id: string;
-    name: string;
-    about: string;
-    water_tips: string;
-    photo: string;
-    environments: Array<String>;
-    frequency: {
-      times: number;
-      repeat_every: string;
-    };
-  };
+  plant: PlantProps;
 }
 
 export function PlantSave() {
@@ -46,6 +37,8 @@ export function PlantSave() {
 
   const route = useRoute();
   const { plant } = route.params as Params;
+
+  const navigation = useNavigation();
 
   function handleChangeDateTime(event: Event, dateTime: Date | undefined) {
     if (Platform.OS == 'android') {
@@ -64,6 +57,26 @@ export function PlantSave() {
 
   function handleOpenAndroidDateTimePicker() {
     setShowDateTimePicker(oldState => !oldState);
+  }
+
+  async function handleSavePlant() {
+    try {
+      await savePlant({
+        ...plant,
+        dataTimeNotification: selectedDateTime,
+      });
+
+      navigation.navigate('Confirmation', {
+        title: 'Tudo certo',
+        subtitle:
+          'Fique tranquilo que sempre vamos lembrar você de cuidar da sua plantinha com bastante amor.',
+        buttonTitle: 'Muito obrigado :D',
+        icon: 'hug',
+        nextScreen: 'MyPlants',
+      });
+    } catch (error) {
+      Alert.alert('ENão foi possível salvar. 😥');
+    }
   }
 
   return (
@@ -99,7 +112,7 @@ export function PlantSave() {
           </DateTimePickerButton>
         )}
 
-        <Button text="Cadastrar Planta" />
+        <Button text="Cadastrar Planta" onPress={handleSavePlant} />
       </PlantControllers>
     </Container>
   );

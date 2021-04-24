@@ -7,6 +7,8 @@ import { EnvironmentButton } from '../../components/EnviromentButton';
 import { PlantCardPrimary } from '../../components/PlantCardPrimary';
 import { Load } from '../../components/Load';
 
+import { PlantProps } from '../../libs/storage';
+
 import {
   Container,
   HeaderContainer,
@@ -21,22 +23,10 @@ import {
 import colors from '../../styles/colors';
 
 import api from '../../services/api';
+
 interface EnvironmentProps {
   key: string;
   title: string;
-}
-
-interface PlantProps {
-  id: String;
-  name: String;
-  about: String;
-  water_tips: String;
-  photo: String;
-  environments: Array<String>;
-  frequency: {
-    times: Number;
-    repeat_every: String;
-  };
 }
 
 export function PlantSelect() {
