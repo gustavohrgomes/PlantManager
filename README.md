@@ -2,9 +2,9 @@
   <img src="./.github/PlantManager.svg">
 <h1>
 
-🌱 Uma aplicação desenvolvida para lembrar as pessoas de regar suas plantinhas 🌱
-
-___
+<h4 align="center">
+  🌱 Uma aplicação desenvolvida para lembrar as pessoas de regar suas plantinhas 🌱
+</h4>
 
 # Sobre :bookmark:
 Todos as pessoas que cuidam de plantinhas seja em casa, escritório ou trabalho, sabemos o quão necessário é mantê-las regadas, principalmente nos dias de hoje, em que estamos cada vez mais ocupados.
