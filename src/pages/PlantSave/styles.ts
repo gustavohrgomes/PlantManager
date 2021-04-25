@@ -4,9 +4,12 @@ import { SvgFromUri } from 'react-native-svg';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 
+export const ScrollViewContainer = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
+})``;
+
 export const Container = styled.View`
   flex: 1;
-  justify-content: space-between;
   background: ${colors.shape};
 `;
 
@@ -15,7 +18,7 @@ export const PlantInfo = styled.View`
   align-items: center;
   justify-content: center;
   background: ${colors.shape};
-  margin: 50px 30px;
+  margin: 20px 30px;
 `;
 
 export const PlantImage = styled(SvgFromUri)``;

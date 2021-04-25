@@ -38,3 +38,14 @@ export const Time = styled.Text`
   font-family: ${fonts.heading};
   color: ${colors.body_dark};
 `;
+
+export const ButtonRemove = styled(RectButton)`
+  width: 90px;
+  height: 100px;
+  background: ${colors.red};
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 10px;
+  margin: 5px 0;
+`;

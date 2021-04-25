@@ -21,6 +21,7 @@ import {
   AlertLabel,
   DateTimePickerButton,
   DateTimePickerText,
+  ScrollViewContainer,
 } from './styles';
 
 import waterdrop from '../../assets/waterdrop.png';
@@ -80,40 +81,42 @@ export function PlantSave() {
   }
 
   return (
-    <Container>
-      <PlantInfo>
-        <PlantImage uri={plant.photo} width={150} height={150} />
-        <PlantName>{plant.name}</PlantName>
-        <PlantAbout>{plant.about}</PlantAbout>
-      </PlantInfo>
+    <ScrollViewContainer>
+      <Container>
+        <PlantInfo>
+          <PlantImage uri={plant.photo} width={150} height={150} />
+          <PlantName>{plant.name}</PlantName>
+          <PlantAbout>{plant.about}</PlantAbout>
+        </PlantInfo>
 
-      <PlantControllers>
-        <TipContainer>
-          <TipImage source={waterdrop} />
-          <TipText>{plant.water_tips}</TipText>
-        </TipContainer>
+        <PlantControllers>
+          <TipContainer>
+            <TipImage source={waterdrop} />
+            <TipText>{plant.water_tips}</TipText>
+          </TipContainer>
 
-        <AlertLabel>Escolha o melhor horário para ser lembrado:</AlertLabel>
+          <AlertLabel>Escolha o melhor horário para ser lembrado:</AlertLabel>
 
-        {showDateTimePicker && (
-          <DateTimePicker
-            value={selectedDateTime}
-            mode="time"
-            display="default"
-            onChange={handleChangeDateTime}
-          />
-        )}
+          {showDateTimePicker && (
+            <DateTimePicker
+              value={selectedDateTime}
+              mode="time"
+              display="default"
+              onChange={handleChangeDateTime}
+            />
+          )}
 
-        {Platform.OS == 'android' && (
-          <DateTimePickerButton onPress={handleOpenAndroidDateTimePicker}>
-            <DateTimePickerText>
-              {format(selectedDateTime, 'HH:mm')}
-            </DateTimePickerText>
-          </DateTimePickerButton>
-        )}
+          {Platform.OS == 'android' && (
+            <DateTimePickerButton onPress={handleOpenAndroidDateTimePicker}>
+              <DateTimePickerText>
+                {format(selectedDateTime, 'HH:mm')}
+              </DateTimePickerText>
+            </DateTimePickerButton>
+          )}
 
-        <Button text="Cadastrar Planta" onPress={handleSavePlant} />
-      </PlantControllers>
-    </Container>
+          <Button text="Cadastrar Planta" onPress={handleSavePlant} />
+        </PlantControllers>
+      </Container>
+    </ScrollViewContainer>
   );
 }

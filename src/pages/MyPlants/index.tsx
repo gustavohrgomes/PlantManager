@@ -3,6 +3,7 @@ import { formatDistance } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
 import { Header } from '../../components/Header';
+import { Load } from '../../components/Load';
 import { loadPlant, PlantProps } from '../../libs/storage';
 
 import {
@@ -43,7 +44,9 @@ export function MyPlants() {
     loadStoragePlants();
   }, []);
 
-  console.log(myPlants);
+  if (loading) {
+    return <Load />;
+  }
 
   return (
     <Container>
