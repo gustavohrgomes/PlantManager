@@ -1,17 +1,17 @@
 <h1 align="center">
-  <img src="./.github/PlantManager.svg">
+  <img src="https://raw.githubusercontent.com/gustavohrgomes/PlantManager/61ac04b983a4b76f67fae89328a7bd93c9e283e2/.github/PlantManager.svg">
 <h1>
 
-<h4 align="center">
+<h3 align="center">
   🌱 Uma aplicação desenvolvida para lembrar as pessoas de regar suas plantinhas 🌱
-</h4>
+</h3>
 
 # Sobre :bookmark:
 Todos as pessoas que cuidam de plantinhas seja em casa, escritório ou trabalho, sabemos o quão necessário é mantê-las regadas, principalmente nos dias de hoje, em que estamos cada vez mais ocupados.
 
 Pensando nisso, foi criado o Plant Manager. Uma aplicação onde o usuário irá cadastrar um horário no qual a planta deverá ser regada e sempre será notificado naquele horário definido.
 
-<img src="./.github/Capa.png">
+<img src="https://github.com/gustavohrgomes/PlantManager/blob/main/.github/Capa.png?raw=true">
 
 # Tecnologias :rocket:
 
