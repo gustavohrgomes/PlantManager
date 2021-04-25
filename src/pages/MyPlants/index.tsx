@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 import { formatDistance } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
 import { Header } from '../../components/Header';
 import { Load } from '../../components/Load';
-import { loadPlant, PlantProps } from '../../libs/storage';
+import { PlantCardSecondary } from '../../components/PlantCardSecondary';
+import { loadPlant, PlantProps, removePlant } from '../../libs/storage';
 
 import {
   Container,
@@ -17,7 +19,6 @@ import {
 } from './styles';
 
 import waterdrop from '../../assets/waterdrop.png';
-import { PlantCardSecondary } from '../../components/PlantCardSecondary';
 
 export function MyPlants() {
   const [myPlants, setMyPlants] = useState<PlantProps[]>([]);
@@ -44,6 +45,28 @@ export function MyPlants() {
     loadStoragePlants();
   }, []);
 
+  function handleRemove(plant: PlantProps) {
+    Alert.alert('Remover', `Deseja remover a ${plant.name}?`, [
+      {
+        text: 'Não 🙏',
+        style: 'cancel',
+      },
+      {
+        text: 'Sim 😪',
+        onPress: async () => {
+          try {
+            await removePlant(plant.id);
+            setMyPlants(oldData =>
+              oldData.filter(item => item.id !== plant.id),
+            );
+          } catch (error) {
+            Alert.alert('Não foi possível remover a planta! 😅');
+          }
+        },
+      },
+    ]);
+  }
+
   if (loading) {
     return <Load />;
   }
@@ -67,6 +90,9 @@ export function MyPlants() {
               name={item.name}
               photo={item.photo}
               hour={item.hour}
+              handleRemove={() => {
+                handleRemove(item);
+              }}
             />
           )}
         />
